@@ -28,3 +28,14 @@ For example `--savepath .` will read saves from the current directory (which not
 For building instructions, please refer to the [wiki](https://github.com/sm64pc/sm64ex/wiki).
 
 **Make sure you have MXE first before attempting to compile for Windows on Linux and WSL. Follow the guide on the wiki.**
+
+## pull requests/patches used:
+https://github.com/sm64pc/sm64ex/pull/446
+https://github.com/sm64pc/sm64ex/pull/441
+https://github.com/sm64pc/sm64ex/pull/435
+https://github.com/sm64pc/sm64ex/pull/428
+https://github.com/sm64pc/sm64ex/pull/409
+https://github.com/sm64pc/sm64ex/pull/408
+https://github.com/sm64pc/sm64ex/pull/406
+https://github.com/sm64pc/sm64ex/pull/300
+https://github.com/sm64pc/sm64ex/blob/nightly/enhancements/60fps_ex.patch
