@@ -283,7 +283,7 @@ BUILD_DIR_BASE := build
 ifeq ($(TARGET_WEB),1)
   BUILD_DIR := $(BUILD_DIR_BASE)/$(VERSION)_web
 else
-  BUILD_DIR := $(BUILD_DIR_BASE)/$(VERSION)_pc
+  BUILD_DIR := $(BUILD_DIR_BASE)/$(VERSION)_$(RENDER_API)_pc
 endif
 
 LIBULTRA := $(BUILD_DIR)/libultra.a

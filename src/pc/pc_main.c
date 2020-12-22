@@ -232,20 +232,27 @@ void main_func(void) {
     #elif defined(RAPI_D3D12)
     rendering_api = &gfx_direct3d12_api;
     # define RAPI_NAME "DirectX 12"
-    #elif defined(RAPI_GL) || defined(RAPI_GL_LEGACY)
+	#elif defined(RAPI_GL_LEGACY)
     rendering_api = &gfx_opengl_api;
     # ifdef USE_GLES
     #  define RAPI_NAME "OpenGL ES"
 	# else
-    #  define RAPI_NAME "OpenGL"
+    #  define RAPI_NAME "OpenGL 1.3"
+    # endif
+    #elif defined(RAPI_GL)
+    rendering_api = &gfx_opengl_api;
+    # ifdef USE_GLES
+    #  define RAPI_NAME "OpenGL ES"
+	# else
+    #  define RAPI_NAME "OpenGL 2.1"
     # endif
     #else
     #error No rendering API!
     #endif
     char window_title[96] =
-    "Super Mario 64 EX BitVer (" RAPI_NAME " " WAPI_NAME ")"
+    "Super Mario 64 EX BitVer | " RAPI_NAME " | " WAPI_NAME " | "
     #ifdef NIGHTLY
-    " nightly " GIT_HASH
+    "nightly " GIT_HASH
     #endif
     ;
 
