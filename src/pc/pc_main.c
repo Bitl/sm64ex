@@ -236,18 +236,16 @@ void main_func(void) {
     rendering_api = &gfx_opengl_api;
     # ifdef USE_GLES
     #  define RAPI_NAME "OpenGL ES"
-    # elif RAPI_GL_LEGACY
-    #  define RAPI_NAME "OpenGL 1.3"
 	# else
-    #  define RAPI_NAME "OpenGL 2.1"
+    #  define RAPI_NAME "OpenGL"
     # endif
     #else
     #error No rendering API!
     #endif
     char window_title[96] =
-    "Super Mario 64 EX (" RAPI_NAME " " WAPI_NAME ")"
+    "Super Mario 64 EX BitVer (" RAPI_NAME " " WAPI_NAME ")"
     #ifdef NIGHTLY
-    " nightly " GIT_HASH " modified by Bitl"
+    " nightly " GIT_HASH
     #endif
     ;
 
