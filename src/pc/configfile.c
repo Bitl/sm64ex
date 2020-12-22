@@ -57,7 +57,7 @@ unsigned int configEnvVolume = MAX_VOLUME;
 
 // Keyboard mappings (VK_ values, by default keyboard/gamepad/mouse)
 unsigned int configKeyA[MAX_BINDS]          = { 0x0039,   0x1000,     0x001C     };
-unsigned int configKeyB[MAX_BINDS]          = { 0x1101,   0x1002,     VK_INVALID };
+unsigned int configKeyB[MAX_BINDS]          = { 0x1101,   0x1002,     0x1103 	 };
 unsigned int configKeyStart[MAX_BINDS]      = { 0x0001,   0x1006,     VK_INVALID };
 unsigned int configKeyL[MAX_BINDS]          = { 0x002D,   0x1007,     VK_INVALID };
 unsigned int configKeyR[MAX_BINDS]          = { 0x0013,   0x100A,     VK_INVALID };

@@ -206,12 +206,27 @@ u16 level_control_timer(s32 timerOp) {
     return gHudDisplay.timer;
 }
 
-u32 pressed_pause(void) {
+u32 can_pause(void) {
     u32 val4 = get_dialog_id() >= 0;
     u32 intangible = (gMarioState->action & ACT_FLAG_INTANGIBLE) != 0;
 
-    if (!intangible && !val4 && !gWarpTransition.isActive && sDelayedWarpOp == WARP_OP_NONE
-        && (gPlayer1Controller->buttonPressed & START_BUTTON)) {
+    if (!intangible && !val4 && !gWarpTransition.isActive && sDelayedWarpOp == WARP_OP_NONE) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+u32 pressed_pause(void) {
+    if (can_pause() && (gPlayer1Controller->buttonPressed & START_BUTTON)) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+u32 lost_focus(void) {
+    if (can_pause() && (focus_Lost == TRUE)) {
         return TRUE;
     }
 
@@ -998,7 +1013,7 @@ s32 play_mode_normal(void) {
             set_play_mode(PLAY_MODE_CHANGE_LEVEL);
         } else if (sTransitionTimer != 0) {
             set_play_mode(PLAY_MODE_CHANGE_AREA);
-        } else if (pressed_pause() || focus_Lost) {
+        } else if (pressed_pause() || lost_focus()) {
             lower_background_noise(1);
             cancel_rumble();
             gCameraMovementFlags |= CAM_MOVE_PAUSE_SCREEN;
