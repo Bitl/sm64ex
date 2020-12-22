@@ -4,4 +4,5 @@ read -p "Press any key to make GL SDL2 ..."
 make
 read -p "Press any key to make GL_LEGACY SDL2 ..."
 make RENDER_API=GL_LEGACY
+read -p "Press any key to clean repo ..."
 make distclean
