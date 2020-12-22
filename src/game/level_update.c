@@ -1003,6 +1003,7 @@ s32 play_mode_normal(void) {
             cancel_rumble();
             gCameraMovementFlags |= CAM_MOVE_PAUSE_SCREEN;
             set_play_mode(PLAY_MODE_PAUSED);
+			focus_Lost = FALSE;
         }
     }
 

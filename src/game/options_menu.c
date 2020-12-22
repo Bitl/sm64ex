@@ -310,8 +310,8 @@ static struct SubMenu menuCamera   = DEF_SUBMENU( menuStr[1], optsCamera );
 static struct SubMenu menuControls = DEF_SUBMENU( menuStr[2], optsControls );
 static struct SubMenu menuVideo    = DEF_SUBMENU( menuStr[3], optsVideo );
 static struct SubMenu menuAudio    = DEF_SUBMENU( menuStr[4], optsAudio );
+static struct SubMenu menuConfirmExit = DEF_SUBMENU( menuStr[5], optsConfirmExit );
 static struct SubMenu menuCheats   = DEF_SUBMENU( menuStr[6], optsCheats );
-static struct SubMenu menuConfirmExit = DEF_SUBMENU( menuStr[7], optsConfirmExit );
 
 /* main options menu definition */
 
@@ -322,10 +322,9 @@ static struct Option optsMain[] = {
     DEF_OPT_SUBMENU( menuStr[2], &menuControls ),
     DEF_OPT_SUBMENU( menuStr[3], &menuVideo ),
     DEF_OPT_SUBMENU( menuStr[4], &menuAudio ),
-    DEF_OPT_BUTTON ( menuStr[5], optmenu_act_exit ),
-	DEF_OPT_SUBMENU ( menuStr[6], &menuConfirmExit ),
+	DEF_OPT_SUBMENU ( menuStr[5], &menuConfirmExit ),
     // NOTE: always keep cheats the last option here because of the half-assed way I toggle them
-    DEF_OPT_SUBMENU( menuStr[7], &menuCheats )
+    DEF_OPT_SUBMENU( menuStr[6], &menuCheats )
 };
 
 static struct SubMenu menuMain = DEF_SUBMENU( menuStr[0], optsMain );

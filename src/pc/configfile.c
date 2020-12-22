@@ -84,9 +84,9 @@ unsigned int configCameraPan     = 0;
 unsigned int configCameraDegrade = 10; // 0 - 100%
 bool         configCameraInvertX = true;
 bool         configCameraInvertY = false;
-bool         configEnableCamera  = false;
+bool         configEnableCamera  = true;
 bool         configCameraAnalog  = true;
-bool         configCameraMouse   = false;
+bool         configCameraMouse   = true;
 #endif
 bool         configSkipIntro     = 0;
 bool         configHUD           = true;
