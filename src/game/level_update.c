@@ -155,6 +155,7 @@ struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_NONE, 0, 1, 0, { 0, 0, 0 }, NULL },
 };
 
+extern bool focus_Lost;
 struct MarioState gMarioStates[1];
 struct HudDisplay gHudDisplay;
 s16 sCurrPlayMode;
@@ -997,7 +998,7 @@ s32 play_mode_normal(void) {
             set_play_mode(PLAY_MODE_CHANGE_LEVEL);
         } else if (sTransitionTimer != 0) {
             set_play_mode(PLAY_MODE_CHANGE_AREA);
-        } else if (pressed_pause()) {
+        } else if (pressed_pause() || focus_Lost) {
             lower_background_noise(1);
             cancel_rumble();
             gCameraMovementFlags |= CAM_MOVE_PAUSE_SCREEN;

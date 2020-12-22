@@ -35,19 +35,19 @@ TARGET_ARCH ?= native
 TARGET_BITS ?= 0
 
 # Disable better camera by default
-BETTERCAMERA ?= 0
+BETTERCAMERA ?= 1
 # Disable no drawing distance by default
 NODRAWINGDISTANCE ?= 0
 # Disable texture fixes by default (helps with them purists)
-TEXTURE_FIX ?= 0
+TEXTURE_FIX ?= 1
 # Enable extended options menu by default
 EXT_OPTIONS_MENU ?= 1
 # Disable text-based save-files by default
-TEXTSAVES ?= 0
+TEXTSAVES ?= 1
 # Load resources from external files
-EXTERNAL_DATA ?= 0
+EXTERNAL_DATA ?= 1
 # Enable Discord Rich Presence
-DISCORDRPC ?= 0
+DISCORDRPC ?= 1
 
 # Various workarounds for weird toolchains
 
@@ -181,6 +181,23 @@ endif
 endif
 endif
 
+#render api names
+ifeq ($(RENDER_API),GL)
+  TARGET := $(TARGET).gl
+else
+ifeq ($(RENDER_API),GL_LEGACY)
+  TARGET := $(TARGET).gllegacy
+else
+ifeq ($(RENDER_API),D3D11)
+  TARGET := $(TARGET).d3d11
+else
+ifeq ($(RENDER_API),D3D12)
+  TARGET := $(TARGET).d3d12
+endif
+endif
+endif
+endif
+
 GRUCODE_CFLAGS := -D$(GRUCODE_DEF)
 GRUCODE_ASFLAGS := $(GRUCODE_ASFLAGS) --defsym $(GRUCODE_DEF)=1
 
@@ -216,6 +233,19 @@ else
   ifeq ($(WINDOW_API),DXGI)
     $(error DXGI can only be used with DirectX renderers)
   endif
+endif
+
+# Window managers: SDL1, SDL2, DXGI (forced if D3D11 or D3D12 in RENDER_API)
+ifeq ($(WINDOW_API),SDL1)
+  TARGET := $(TARGET).sdl1
+else
+ifeq ($(WINDOW_API),SDL2)
+  TARGET := $(TARGET).sdl2
+else
+ifeq ($(WINDOW_API),DXGI)
+  TARGET := $(TARGET).dxgi
+endif
+endif
 endif
 
 ################### Universal Dependencies ###################

@@ -10,6 +10,7 @@
 #define TEXT_OPT_CONTROLS  _("CONTROLS")
 #define TEXT_OPT_VIDEO     _("DISPLAY")
 #define TEXT_OPT_AUDIO     _("SOUND")
+#define TEXT_OPT_CONFIRM   _("CONFIRM")
 #define TEXT_OPT_CHEATS    _("CHEATS")
 
 // Markers
@@ -56,6 +57,7 @@
 #define TEXT_OPT_AUTO      _("AUTO")
 #define TEXT_OPT_HUD       _("HUD")
 #define TEXT_OPT_THREEPT   _("THREE POINT")
+#define TEXT_OPT_DRAWDIST  _("DRAW DISTANCE")
 #define TEXT_OPT_APPLY     _("APPLY")
 #define TEXT_OPT_RESETWND  _("RESET WINDOW")
 
@@ -120,6 +122,7 @@
 #define TEXT_OPT_AUTO      _("Auto")
 #define TEXT_OPT_HUD       _("HUD")
 #define TEXT_OPT_THREEPT   _("Three-point")
+#define TEXT_OPT_DRAWDIST  _("Draw Distance")
 #define TEXT_OPT_APPLY     _("Apply")
 #define TEXT_OPT_RESETWND  _("Reset Window")
 

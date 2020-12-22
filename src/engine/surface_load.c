@@ -14,6 +14,10 @@
 #include "game/mario.h"
 #include "game/object_list_processor.h"
 #include "surface_load.h"
+#include "game/game_init.h"
+#ifndef NODRAWINGDISTANCE
+#include "pc/configfile.h"
+#endif
 
 s32 unused8038BE90;
 
@@ -358,6 +362,11 @@ static struct Surface *read_surface_data(s16 *vertexData, s16 **vertexIndices) {
     nz *= mag;
 
     surface = alloc_surface();
+
+    vec3s_copy(surface->prevVertex1, surface->vertex1);
+    vec3s_copy(surface->prevVertex2, surface->vertex2);
+    vec3s_copy(surface->prevVertex3, surface->vertex3);
+    surface->modifiedTimestamp = gGlobalTimer;
 
     surface->vertex1[0] = x1;
     surface->vertex2[0] = x2;
@@ -786,7 +795,7 @@ void load_object_collision_model(void) {
     }
 
 #ifndef NODRAWINGDISTANCE
-    if (marioDist < gCurrentObject->oDrawingDistance) {
+    if (marioDist < gCurrentObject->oDrawingDistance * configDrawDistance / 100.0f) {
 #endif
         gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
 #ifndef NODRAWINGDISTANCE

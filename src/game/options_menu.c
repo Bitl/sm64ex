@@ -60,6 +60,7 @@ static const u8 menuStr[][32] = {
     { TEXT_OPT_AUDIO },
     { TEXT_EXIT_GAME },
     { TEXT_OPT_CHEATS },
+	{ TEXT_OPT_CONFIRM },
 };
 
 static const u8 optsCameraStr[][32] = {
@@ -85,6 +86,7 @@ static const u8 optsVideoStr[][32] = {
     { TEXT_OPT_AUTO },
     { TEXT_OPT_HUD },
     { TEXT_OPT_THREEPT },
+	{ TEXT_OPT_DRAWDIST },
     { TEXT_OPT_APPLY },
 };
 
@@ -105,6 +107,10 @@ static const u8 optsCheatsStr[][64] = {
     { TEXT_OPT_CHEAT7 },
     { TEXT_OPT_CHEAT8 },
     { TEXT_OPT_CHEAT9 },
+};
+
+static const u8 optsConfirmExitStr[][32] = {
+  { TEXT_YES }
 };
 
 static const u8 bindStr[][32] = {
@@ -261,8 +267,15 @@ static struct Option optsVideo[] = {
     DEF_OPT_TOGGLE( optsVideoStr[5], &configWindow.vsync ),
     DEF_OPT_CHOICE( optsVideoStr[1], &configFiltering, filterChoices ),
     DEF_OPT_TOGGLE( optsVideoStr[7], &configHUD ),
+#ifndef NODRAWINGDISTANCE
+    DEF_OPT_SCROLL( optsVideoStr[9], &configDrawDistance, 50, 509, 10 ),
+#endif
     DEF_OPT_BUTTON( optsVideoStr[4], optvideo_reset_window ),
-    DEF_OPT_BUTTON( optsVideoStr[9], optvideo_apply ),
+#ifndef NODRAWINGDISTANCE
+    DEF_OPT_BUTTON( optsVideoStr[10], optvideo_apply ),
+#else
+	DEF_OPT_BUTTON( optsVideoStr[9], optvideo_apply ),
+#endif
 };
 
 static struct Option optsAudio[] = {
@@ -285,6 +298,10 @@ static struct Option optsCheats[] = {
 
 };
 
+static struct Option optsConfirmExit[] = {
+    DEF_OPT_BUTTON( optsConfirmExitStr[0], optmenu_act_exit ),
+};
+
 /* submenu definitions */
 
 #ifdef BETTERCAMERA
@@ -294,6 +311,7 @@ static struct SubMenu menuControls = DEF_SUBMENU( menuStr[2], optsControls );
 static struct SubMenu menuVideo    = DEF_SUBMENU( menuStr[3], optsVideo );
 static struct SubMenu menuAudio    = DEF_SUBMENU( menuStr[4], optsAudio );
 static struct SubMenu menuCheats   = DEF_SUBMENU( menuStr[6], optsCheats );
+static struct SubMenu menuConfirmExit = DEF_SUBMENU( menuStr[7], optsConfirmExit );
 
 /* main options menu definition */
 
@@ -305,8 +323,9 @@ static struct Option optsMain[] = {
     DEF_OPT_SUBMENU( menuStr[3], &menuVideo ),
     DEF_OPT_SUBMENU( menuStr[4], &menuAudio ),
     DEF_OPT_BUTTON ( menuStr[5], optmenu_act_exit ),
+	DEF_OPT_SUBMENU ( menuStr[6], &menuConfirmExit ),
     // NOTE: always keep cheats the last option here because of the half-assed way I toggle them
-    DEF_OPT_SUBMENU( menuStr[6], &menuCheats )
+    DEF_OPT_SUBMENU( menuStr[7], &menuCheats )
 };
 
 static struct SubMenu menuMain = DEF_SUBMENU( menuStr[0], optsMain );
@@ -567,13 +586,13 @@ void optmenu_check_buttons(void) {
         allowInput = 1;
     }
 
-    if (ABS(gPlayer1Controller->stickY) > 60) {
+    if ((ABS(gPlayer1Controller->stickY) > 60) || (gPlayer1Controller->buttonPressed & (D_CBUTTONS|U_CBUTTONS))) {
         if (allowInput) {
             #ifndef nosound
             play_sound(SOUND_MENU_CHANGE_SELECT, gDefaultSoundArgs);
             #endif
 
-            if (gPlayer1Controller->stickY >= 60) {
+            if ((gPlayer1Controller->stickY >= 60) || (gPlayer1Controller->buttonPressed & U_CBUTTONS)) {
                 currentMenu->select--;
                 if (currentMenu->select < 0)
                     currentMenu->select = currentMenu->numOpts-1;
@@ -588,12 +607,12 @@ void optmenu_check_buttons(void) {
             else if (currentMenu->select > currentMenu->scroll + 3)
                 currentMenu->scroll = currentMenu->select - 3;
         }
-    } else if (ABS(gPlayer1Controller->stickX) > 60) {
+    } else if ((ABS(gPlayer1Controller->stickX) > 60) || (gPlayer1Controller->buttonPressed & (L_CBUTTONS|R_CBUTTONS))) { 
         if (allowInput) {
             #ifndef nosound
             play_sound(SOUND_MENU_CHANGE_SELECT, gDefaultSoundArgs);
             #endif
-            if (gPlayer1Controller->stickX >= 60)
+            if ((gPlayer1Controller->stickX >= 60) || (gPlayer1Controller->buttonPressed & R_CBUTTONS))
                 optmenu_opt_change(&currentMenu->opts[currentMenu->select], 1);
             else
                 optmenu_opt_change(&currentMenu->opts[currentMenu->select], -1);
