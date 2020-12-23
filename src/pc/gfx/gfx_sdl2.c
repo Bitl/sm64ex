@@ -34,6 +34,7 @@
 #include "../configfile.h"
 #include "../cliopts.h"
 #include "../../game/level_update.h"
+#include "../../game/game_init.h"
 
 #include "src/pc/controller/controller_keyboard.h"
 
@@ -320,7 +321,7 @@ static void gfx_sdl_handle_events(void) {
                             configWindow.h = event.window.data2;
                             break;
 						case SDL_WINDOWEVENT_FOCUS_LOST:
-							if (sCurrPlayMode != PLAY_MODE_PAUSED)
+							if (sCurrPlayMode != PLAY_MODE_PAUSED && gCurrDemoInput == NULL)
 								focus_Lost = TRUE;
                             break;
                     }
