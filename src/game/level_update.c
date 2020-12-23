@@ -7,7 +7,6 @@
 #include "audio/external.h"
 #include "level_update.h"
 #include "game_init.h"
-#include "../menu/level_select_menu.h"
 #include "main.h"
 #include "engine/math_util.h"
 #include "engine/graph_node.h"
@@ -156,6 +155,7 @@ struct CreditsEntry sCreditsSequence[] = {
 };
 
 extern bool focus_Lost;
+extern s16 isInDemo;
 struct MarioState gMarioStates[1];
 struct HudDisplay gHudDisplay;
 s16 sCurrPlayMode;
