@@ -218,7 +218,7 @@ u32 can_pause(void) {
 }
 
 u32 pressed_pause(void) {
-    if (can_pause() && (gPlayer1Controller->buttonPressed & START_BUTTON)) {
+    if (can_pause() && (focus_Lost == FALSE) && (gPlayer1Controller->buttonPressed & START_BUTTON)) {
         return TRUE;
     }
 
@@ -226,7 +226,7 @@ u32 pressed_pause(void) {
 }
 
 u32 lost_focus(void) {
-    if (can_pause() && (focus_Lost == TRUE)) {
+    if (can_pause() && !pressed_pause() && (focus_Lost == TRUE)) {
         return TRUE;
     }
 
