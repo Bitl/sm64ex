@@ -58,9 +58,8 @@ static const u8 menuStr[][32] = {
     { TEXT_OPT_CONTROLS },
     { TEXT_OPT_VIDEO },
     { TEXT_OPT_AUDIO },
-    { TEXT_EXIT_GAME },
+    { TEXT_OPT_CONFIRM },
     { TEXT_OPT_CHEATS },
-	{ TEXT_OPT_CONFIRM },
 };
 
 static const u8 optsCameraStr[][32] = {
@@ -110,6 +109,7 @@ static const u8 optsCheatsStr[][64] = {
 };
 
 static const u8 optsConfirmExitStr[][32] = {
+  { TEXT_OPT_ABANDON }
   { TEXT_YES }
 };
 
@@ -205,6 +205,8 @@ struct SubMenu {
     { .type = OPT_BUTTON, .label = lbl, .actionFn = act }
 #define DEF_SUBMENU(lbl, opt) \
     { .label = lbl, .opts = opt, .numOpts = sizeof(opt) / sizeof(opt[0]) }
+#define DEF_OPT_LABEL(lbl) \
+    { .type = OPT_INVALID, .label = lbl }
 
 /* button action functions */
 
@@ -299,7 +301,8 @@ static struct Option optsCheats[] = {
 };
 
 static struct Option optsConfirmExit[] = {
-    DEF_OPT_BUTTON( optsConfirmExitStr[0], optmenu_act_exit ),
+	DEF_OPT_LABEL(optsConfirmExitStr[0]),
+    DEF_OPT_BUTTON( optsConfirmExitStr[1], optmenu_act_exit ),
 };
 
 /* submenu definitions */

@@ -7,7 +7,7 @@
 #include "audio/external.h"
 #include "level_update.h"
 #include "game_init.h"
-#include "level_update.h"
+#include "level_select_menu.h"
 #include "main.h"
 #include "engine/math_util.h"
 #include "engine/graph_node.h"
@@ -210,7 +210,7 @@ u32 can_pause(void) {
     u32 val4 = get_dialog_id() >= 0;
     u32 intangible = (gMarioState->action & ACT_FLAG_INTANGIBLE) != 0;
 
-    if (!intangible && !val4 && !gWarpTransition.isActive && sDelayedWarpOp == WARP_OP_NONE) {
+    if (!intangible && !val4 && !gWarpTransition.isActive && sDelayedWarpOp == WARP_OP_NONE && isInDemo == FALSE) {
         return TRUE;
     }
 

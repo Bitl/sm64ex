@@ -25,7 +25,9 @@ static char gLevelSelect_StageNamesText[64][16] = {
 #undef STUB_LEVEL
 #undef DEFINE_LEVEL
 
+extern bool focus_Lost;
 static u16 gDemoCountdown = 0;
+bool isInDemo = FALSE;
 #ifndef VERSION_JP
 static s16 playMarioGreeting = 1;
 static s16 gameOverNotPlayed = 1;
@@ -62,9 +64,11 @@ int run_press_start_demo_timer(s32 timer) {
                 gCurrSaveFileNum = 1;
                 gCurrActNum = 1;
 				playMarioGreeting = 1;
+				isInDemo = TRUE;
             }
         } else { // activity was detected, so reset the demo countdown.
             gDemoCountdown = 0;
+			isInDemo = FALSE;
         }
     }
     return timer;
@@ -90,6 +94,7 @@ int start_demo(int timer)
     timer = (s8)((struct DemoInput *) gDemo.targetAnim)->timer; // TODO: see if making timer s8 matches
     gCurrSaveFileNum = 1;
     gCurrActNum = 6;
+	isInDemo = TRUE;
     return timer;
 }
 

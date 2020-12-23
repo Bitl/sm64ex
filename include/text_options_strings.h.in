@@ -10,7 +10,7 @@
 #define TEXT_OPT_CONTROLS  _("CONTROLS")
 #define TEXT_OPT_VIDEO     _("DISPLAY")
 #define TEXT_OPT_AUDIO     _("SOUND")
-#define TEXT_OPT_CONFIRM   _("CONFIRM")
+#define TEXT_OPT_CONFIRM   _("QUIT")
 #define TEXT_OPT_CHEATS    _("CHEATS")
 
 // Markers
@@ -60,6 +60,7 @@
 #define TEXT_OPT_DRAWDIST  _("DRAW DISTANCE")
 #define TEXT_OPT_APPLY     _("APPLY")
 #define TEXT_OPT_RESETWND  _("RESET WINDOW")
+#define TEXT_OPT_ABANDON   _("DO YOU WISH TO ABANDON THE MUSHROOM KINGDOM?")
 
 #define TEXT_BIND_A        _("A BUTTON")
 #define TEXT_BIND_B        _("B BUTTON")
@@ -125,6 +126,7 @@
 #define TEXT_OPT_DRAWDIST  _("Draw Distance")
 #define TEXT_OPT_APPLY     _("Apply")
 #define TEXT_OPT_RESETWND  _("Reset Window")
+#define TEXT_OPT_ABANDON   _("Do you wish to abandon the Mushroom Kingdom?")
 
 #define TEXT_BIND_A        _("A Button")
 #define TEXT_BIND_B        _("B Button")
