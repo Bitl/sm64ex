@@ -7,7 +7,7 @@
 #include "audio/external.h"
 #include "level_update.h"
 #include "game_init.h"
-#include "level_select_menu.h"
+#include "../menu/level_select_menu.h"
 #include "main.h"
 #include "engine/math_util.h"
 #include "engine/graph_node.h"
