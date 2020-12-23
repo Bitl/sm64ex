@@ -210,7 +210,7 @@ u32 can_pause(void) {
     u32 val4 = get_dialog_id() >= 0;
     u32 intangible = (gMarioState->action & ACT_FLAG_INTANGIBLE) != 0;
 
-    if (!intangible && !val4 && !gWarpTransition.isActive && sDelayedWarpOp == WARP_OP_NONE && isInDemo == FALSE) {
+    if (!intangible && !val4 && !gWarpTransition.isActive && sDelayedWarpOp == WARP_OP_NONE && isInDemo == 0) {
         return TRUE;
     }
 

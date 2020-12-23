@@ -5,7 +5,7 @@
 
 #include "macros.h"
 
-extern bool isInDemo;
+extern s16 isInDemo;
 
 s32 lvl_intro_update(s16 arg1, UNUSED s32 arg2);
 
