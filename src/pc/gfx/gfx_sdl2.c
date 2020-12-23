@@ -33,6 +33,7 @@
 #include "../pc_main.h"
 #include "../configfile.h"
 #include "../cliopts.h"
+#include "../../game/level_update.h"
 
 #include "src/pc/controller/controller_keyboard.h"
 
@@ -317,7 +318,8 @@ static void gfx_sdl_handle_events(void) {
                             configWindow.h = event.window.data2;
                             break;
 						case SDL_WINDOWEVENT_FOCUS_LOST:
-                            focus_Lost = TRUE;
+							if (sCurrPlayMode != PLAY_MODE_PAUSED)
+								focus_Lost = TRUE;
                             break;
                     }
                 }
