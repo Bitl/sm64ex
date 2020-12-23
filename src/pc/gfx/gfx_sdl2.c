@@ -44,6 +44,8 @@
 # define FRAMERATE 30
 #endif
 
+#define PLAY_MODE_PAUSED 2
+
 bool focus_Lost = FALSE;
 static SDL_Window *wnd;
 static SDL_GLContext ctx = NULL;
