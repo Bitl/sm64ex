@@ -377,6 +377,11 @@ ifeq ($(TARGET_RPI),1)
         endif
 endif
 
+# allow us to run faster on lower end PCs with GL_LEGACY enabled
+ifeq ($(RENDER_API),GL_LEGACY)
+	OPT_FLAGS := -O0
+endif
+
 # File dependencies and variables for specific files
 include Makefile.split
 
