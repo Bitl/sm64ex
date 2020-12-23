@@ -321,7 +321,7 @@ static void gfx_sdl_handle_events(void) {
                             configWindow.h = event.window.data2;
                             break;
 						case SDL_WINDOWEVENT_FOCUS_LOST:
-							if (ssCurrPlayMode != PLAY_MODE_PAUSED && gCurrDemoInput == NULL)
+							if (sCurrPlayMode != PLAY_MODE_PAUSED && gCurrDemoInput == NULL)
 								focus_Lost = TRUE;
                             break;
                     }
