@@ -237,7 +237,7 @@ void main_func(void) {
     # ifdef USE_GLES
     #  define RAPI_NAME "OpenGL ES"
 	# else
-    #  define RAPI_NAME "OpenGL 1.3"
+    #  define RAPI_NAME "OpenGL 1.1"
     # endif
     #elif defined(RAPI_GL)
     rendering_api = &gfx_opengl_api;
