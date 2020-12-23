@@ -109,8 +109,8 @@ static const u8 optsCheatsStr[][64] = {
 };
 
 static const u8 optsConfirmExitStr[][32] = {
-  { TEXT_OPT_ABANDON }
-  { TEXT_YES }
+  { TEXT_OPT_ABANDON },
+  { TEXT_YES },
 };
 
 static const u8 bindStr[][32] = {
