@@ -24,9 +24,7 @@
 
 #endif // End of OS-Specific GL defines
 
-#ifndef RAPI_GL_LEGACY
 #include <stdint.h>
-#endif
 #include <stdio.h>
 #include <unistd.h>
 
@@ -56,14 +54,10 @@ static void (*kb_all_keys_up)(void) = NULL;
 
 // whether to use timer for frame control
 static bool use_timer = true;
-#ifndef RAPI_GL_LEGACY
 // time between consequtive game frames, in perf counter ticks
 static double frame_time = 0.0; // set in init()
 // GetPerformanceFrequency
 static double perf_freq = 0.0;
-#else
-static const int frame_time = 1000 / FRAMERATE;
-#endif
 
 const SDL_Scancode windows_scancode_table[] = {
   /*  0                        1                            2                         3                            4                     5                            6                            7  */
@@ -117,12 +111,10 @@ const SDL_Scancode scancode_rmapping_nonextended[][2] = {
 
 #define IS_FULLSCREEN() ((SDL_GetWindowFlags(wnd) & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
 
-#ifndef RAPI_GL_LEGACY
 static inline void sys_sleep(const uint64_t us) {
     // TODO: not everything has usleep()
     usleep(us);
 }
-#endif
 
 static int test_vsync(void) {
     // Even if SDL_GL_SetSwapInterval succeeds, it doesn't mean that VSync actually works.
@@ -245,10 +237,8 @@ static void gfx_sdl_init(const char *window_title) {
 
     gfx_sdl_set_fullscreen();
 
-	#ifndef RAPI_GL_LEGACY
     perf_freq = SDL_GetPerformanceFrequency();
     frame_time = perf_freq / (2 * FRAMERATE);
-	#endif
 
     for (size_t i = 0; i < sizeof(windows_scancode_table) / sizeof(SDL_Scancode); i++) {
         inverted_scancode_table[windows_scancode_table[i]] = i;
@@ -356,7 +346,6 @@ static bool gfx_sdl_start_frame(void) {
 }
 
 static inline void sync_framerate_with_timer(void) {
-	#ifndef RAPI_GL_LEGACY
     static double last_time;
     static double last_sec;
     static int frames_since_last_sec;
@@ -378,15 +367,6 @@ static inline void sync_framerate_with_timer(void) {
     } else {
         last_time = now;
     }
-	#else
-	static Uint32 last_time = 0;
-	// get base timestamp on the first frame (might be different from 0)
-	if (last_time == 0) last_time = SDL_GetTicks();
-	const int elapsed = SDL_GetTicks() - last_time;
-	if (elapsed < frame_time)
-		SDL_Delay(frame_time - elapsed);
-	last_time += frame_time;
-	#endif
 }
 
 static void gfx_sdl_swap_buffers_begin(void) {
